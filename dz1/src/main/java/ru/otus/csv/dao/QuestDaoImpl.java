@@ -11,34 +11,30 @@ import java.util.Arrays;
 
 public class QuestDaoImpl implements QuestDao {
     public Quest findOneTest(int index) {
-        String question = "QU";
+        String question = "";
         ArrayList<String> answers = new ArrayList<>();
-        answers.add("ANSWER1");
-
-
+//        answers.add("ANSWER1");
         CSVReader csvReader = null;
-        ClassLoader classLoader = getClass().getClassLoader();
-
-//        try {
-//            Reader reader = Files.newBufferedReader(Paths.get("questions.csv"));
-//            csvReader = new CSVReader(reader);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
+//        ClassLoader classLoader = getClass().getClassLoader();
         try {
 //            File file = new File(classLoader.getResource("/questions.csv").getFile());
-            File file = new File(String.valueOf(this.getClass().getResource("/questions.csv")));
-            csvReader = new CSVReader(new FileReader(file), ',', '"', 0);
+//            File file = new File(String.valueOf(this.getClass().getResource("/questions.csv")));
+//            File file = new File("/questions.csv");
+//            File file = ResourceUtils.getFile(this.getClass().getResource("/some_file.txt"));
+            File file = new File(this.getClass().getResource("/questions.csv").getFile());
+//            FileReader fileReader = new FileReader(file);
+            csvReader = new CSVReader( new FileReader(file), ',', '"', 0);
 
             if (csvReader != null) {
                 String[] nextLine;
+                int i = 0;
                 while ((nextLine = csvReader.readNext()) != null) {
-                    if (nextLine != null) {
-
-                        System.out.println(Arrays.toString(nextLine));
+                    if ((nextLine != null) && (i == index)) {
+//                        System.out.println(Arrays.toString(nextLine));
+                        question = nextLine[0];
+                        answers.addAll(Arrays.asList(nextLine[1],nextLine[2],nextLine[3],nextLine[4]));
                     }
+                    i++;
                 }
             }
         } catch (FileNotFoundException e) {
