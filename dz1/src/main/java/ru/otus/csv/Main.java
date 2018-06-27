@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 //        int[] userAnswers = new int[5];
-        ArrayList<Integer> userAnswers = new ArrayList<Integer>();
+        ArrayList<Integer> userAnswers = new ArrayList<>();
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/context.xml");
         QuestionService service = context.getBean(QuestionService.class);
