@@ -19,20 +19,22 @@ public class Main {
         System.out.println("Enter your surname:");
         String surname = scanner.nextLine();
         System.out.println("Testing began");
-
         for (int i = 0; i < 5; i++) {
             Quest quest = service.getOneTest(i);
-            System.out.printf("Question #%d: %s %n", i+1, quest.getQuestion());
-            System.out.println("Select the answer: ");
+            System.out.printf("Question #%d: %s %n", i + 1, quest.getQuestion());
+            System.out.println("Answers: ");
             int j = 1;
-            for (String s : quest.getAnswers()){
-                System.out.printf("%d) %s %n",j,s);
+            for (String s : quest.getAnswers()) {
+                System.out.printf("%d) %s %n", j, s);
                 j++;
             }
-            int userAnswer = scanner.nextInt();
-            if (quest.getAnswers().get(userAnswer - 1).equals(quest.getCorrectAnswer())) {
-                score ++;
-            }
+            int userAnswer = 0;
+            do {
+                System.out.println("Enter the number of answer: ");
+                userAnswer = scanner.nextInt();
+            } while ((userAnswer < 1) || (userAnswer > 4));
+            if (quest.getAnswers().get(userAnswer - 1).equals(quest.getCorrectAnswer()))
+                score++;
         }
         System.out.println("Student: " + name + " " + surname);
         System.out.println("Result: " + score);

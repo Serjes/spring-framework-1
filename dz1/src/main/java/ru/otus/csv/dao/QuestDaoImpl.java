@@ -9,11 +9,18 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class QuestDaoImpl implements QuestDao {
+    private String fileName;
+
+    public QuestDaoImpl(String fileName) {
+        this.fileName = fileName;
+    }
+
     public Quest findOneTest(int index) {
         String question = "";
         String correctAnswer = "";
         ArrayList<String> answers = new ArrayList<>();
-        File file  = new File(this.getClass().getResource("/testquestions.csv").getFile());
+//        File file  = new File(this.getClass().getResource("/questions.csv").getFile());
+        File file  = new File(this.getClass().getResource("/" + fileName).getFile());
         try (CSVReader csvReader = new CSVReader(new FileReader(file), ',', '"', 0)) {
             String[] nextLine;
             int i = 0;

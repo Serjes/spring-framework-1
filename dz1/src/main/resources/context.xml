@@ -5,6 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="questDao" class="ru.otus.csv.dao.QuestDaoImpl">
+        <constructor-arg name="fileName" value="questions.csv"/>
     </bean>
 
     <bean id="questionService" class="ru.otus.csv.service.QuestionServiceImpl">
