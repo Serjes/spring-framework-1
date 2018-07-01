@@ -1,21 +1,21 @@
 package ru.otus.csv.dao;
 
 import au.com.bytecode.opencsv.CSVReader;
-import ru.otus.csv.domain.Quest;
+import ru.otus.csv.domain.Question;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class QuestDaoImpl implements QuestDao {
+public class QuestionDaoImpl implements QuestionDao {
     private String fileName;
 
-    public QuestDaoImpl(String fileName) {
+    public QuestionDaoImpl(String fileName) {
         this.fileName = fileName;
     }
 
-    public Quest findOneTest(int index) {
+    public Question findOneTest(int index) {
         String question = "";
         String correctAnswer = "";
         ArrayList<String> answers = new ArrayList<>();
@@ -38,6 +38,6 @@ public class QuestDaoImpl implements QuestDao {
             e.printStackTrace();
         }
         Collections.shuffle(answers);
-        return new Quest(question, answers, correctAnswer);
+        return new Question(question, answers, correctAnswer);
     }
 }

@@ -2,12 +2,12 @@ package ru.otus.csv.domain;
 
 import java.util.ArrayList;
 
-public class Quest {
+public class Question {
     private String question;
     private ArrayList<String> answers;
     private String correctAnswer;
 
-    public Quest(String question, ArrayList<String> answers, String correctAnswer){
+    public Question(String question, ArrayList<String> answers, String correctAnswer){
         this.question = question;
         this.answers = answers;
         this.correctAnswer = correctAnswer;

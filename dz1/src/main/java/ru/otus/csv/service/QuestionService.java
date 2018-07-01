@@ -1,7 +1,7 @@
 package ru.otus.csv.service;
 
-import ru.otus.csv.domain.Quest;
+import ru.otus.csv.domain.Question;
 
 public interface QuestionService {
-    Quest getOneTest(int i);
+    Question getOneTest(int i);
 }

@@ -1,16 +1,16 @@
 package ru.otus.csv.service;
 
-import ru.otus.csv.dao.QuestDao;
-import ru.otus.csv.domain.Quest;
+import ru.otus.csv.dao.QuestionDao;
+import ru.otus.csv.domain.Question;
 
 public class QuestionServiceImpl implements QuestionService{
-    private QuestDao dao;
+    private QuestionDao dao;
 
-    public QuestionServiceImpl(QuestDao dao) {
+    public QuestionServiceImpl(QuestionDao dao) {
         this.dao = dao;
     }
 
-    public Quest getOneTest(int i) {
+    public Question getOneTest(int i) {
         return dao.findOneTest(i);
     }
 }
