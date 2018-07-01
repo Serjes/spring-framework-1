@@ -12,4 +12,7 @@
         <constructor-arg name="dao" ref="questDao"/>
     </bean>
 
+    <bean id="testingService" class="ru.otus.csv.service.TestingServiceImpl">
+        <constructor-arg name="qService" ref="questionService"/>
+    </bean>
 </beans>

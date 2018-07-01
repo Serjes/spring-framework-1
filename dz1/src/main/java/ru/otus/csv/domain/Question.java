@@ -3,6 +3,7 @@ package ru.otus.csv.domain;
 import java.util.ArrayList;
 
 public class Question {
+
     private String question;
     private ArrayList<String> answers;
     private String correctAnswer;
