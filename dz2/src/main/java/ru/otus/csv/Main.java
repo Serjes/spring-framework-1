@@ -9,8 +9,6 @@ import ru.otus.csv.service.TestingService;
 public class Main {
     public static void main(String[] args) {
 
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/context.xml");
-//        TestingService testingService = context.getBean(TestingService.class);
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(AppConfig.class);
         context.refresh();

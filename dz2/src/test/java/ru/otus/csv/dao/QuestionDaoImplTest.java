@@ -5,16 +5,28 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.otus.csv.domain.Question;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Properties;
 
 public class QuestionDaoImplTest {
-    private static final String TEST_FILE_NAME = "testquestions.csv";
+//    private static final String TEST_FILE_NAME = "testquestions.csv";
+    private static final String PATH_TO_PROPERTIES = "src/main/resources/application.properties";
     private QuestionDaoImpl questionDao;
+    private Properties prop = new Properties();
 
     @Before
     public void setUp() throws Exception {
-        questionDao = new QuestionDaoImpl(TEST_FILE_NAME);
+        try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTIES)) {
+            prop.load(fileInputStream);
+            String testFileName = prop.getProperty("testcsvfile.url");
+//            System.out.println("testFileName:  " + testFileName);
+            questionDao = new QuestionDaoImpl(testFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
