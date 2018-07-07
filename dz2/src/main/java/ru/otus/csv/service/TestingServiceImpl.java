@@ -1,28 +1,34 @@
 package ru.otus.csv.service;
 
+import org.springframework.context.MessageSource;
 import ru.otus.csv.domain.Person;
 import ru.otus.csv.domain.Question;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class TestingServiceImpl implements TestingService{
 
     private QuestionService qService;
+    private MessageSource messageSource;
 
-    public TestingServiceImpl(QuestionService qService) {
+    public TestingServiceImpl(QuestionService qService, MessageSource messageSource) {
         this.qService = qService;
+        this.messageSource = messageSource;
     }
 
     @Override
     public Person begin() {
         int score = 0;
-        System.out.println("Enter your name:");
+//        System.out.println("Enter your name:");
+        System.out.println(messageSource.getMessage("user.name", null, Locale.US) +":");
+        System.out.println(messageSource.getMessage("user.name", null, null) +":");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         System.out.println("Enter your surname:");
         String surname = scanner.nextLine();
         Person student = new Person(name, surname);
-        System.out.println("Testing began");
+//        System.out.println("Testing began");
         for (int i = 0; i < 5; i++) {
             Question question = qService.getOneTest(i);
             System.out.printf("Question #%d: %s %n", i + 1, question.getQuestion());

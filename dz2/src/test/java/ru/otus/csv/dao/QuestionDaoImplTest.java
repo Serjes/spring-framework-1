@@ -12,8 +12,7 @@ import java.util.HashSet;
 import java.util.Properties;
 
 public class QuestionDaoImplTest {
-//    private static final String TEST_FILE_NAME = "testquestions.csv";
-    private static final String PATH_TO_PROPERTIES = "src/main/resources/application.properties";
+    private static final String PATH_TO_PROPERTIES = "src/test/resources/application.properties";
     private QuestionDaoImpl questionDao;
     private Properties prop = new Properties();
 
@@ -22,7 +21,6 @@ public class QuestionDaoImplTest {
         try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTIES)) {
             prop.load(fileInputStream);
             String testFileName = prop.getProperty("testcsvfile.url");
-//            System.out.println("testFileName:  " + testFileName);
             questionDao = new QuestionDaoImpl(testFileName);
         } catch (IOException e) {
             e.printStackTrace();
