@@ -44,7 +44,7 @@ public class AppConfig {
     }
 
     @Bean
-    TestingService testingService(QuestionService qService, MessageSource messageSource){
-        return new TestingServiceImpl(qService, messageSource);
+    TestingService testingService(QuestionService qService, MessageSource messageSource,@Value("${local}") Locale local){
+        return new TestingServiceImpl(qService, messageSource, local);
     }
 }
