@@ -12,11 +12,8 @@ public class Main {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(AppConfig.class);
         context.refresh();
+
         TestingService testingService = context.getBean(TestingService.class);
-
-        Person student = testingService.begin();
-        System.out.println("Student: " + student.getName() + " " + student.getSurname());
-        System.out.println("Result: " + student.getScore());
-
+        testingService.begin();
     }
 }

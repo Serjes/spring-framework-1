@@ -18,12 +18,6 @@ import java.util.Locale;
 @PropertySource("classpath:application.properties")
 @Configuration
 public class AppConfig {
-//    @Value("#{ systemProperties['user.region'] }")
-//    private Locale currentLocale;
-//
-//    public Locale getCurrentLocale() {
-//        return currentLocale;
-//    }
 
     @Bean
     MessageSource messageSource() {

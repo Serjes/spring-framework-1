@@ -20,7 +20,7 @@ public class QuestionDaoImplTest {
     public void setUp() throws Exception {
         try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTIES)) {
             prop.load(fileInputStream);
-            String testFileName = prop.getProperty("testcsvfile.url");
+            String testFileName = prop.getProperty("csvfile.url");
             questionDao = new QuestionDaoImpl(testFileName);
         } catch (IOException e) {
             e.printStackTrace();

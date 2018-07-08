@@ -4,5 +4,5 @@ import ru.otus.csv.domain.Person;
 
 public interface TestingService {
 
-    Person begin();
+    void begin();
 }
