@@ -21,8 +21,35 @@ public class QuestionDaoImpl implements QuestionDao {
         String question = "";
         String correctAnswer = "";
         ArrayList<String> answers = new ArrayList<>();
-        File file  = new File(this.getClass().getResource("/" + fileName).getFile());
-        try (CSVReader csvReader = new CSVReader(new FileReader(file), ',', '"', 0)) {
+//        File file  = new File(this.getClass().getResource("classpath:/" + fileName).getFile());
+//        File file  = new File(this.getClass().getResource("/" + fileName).getFile());
+        String fileNameResource = "";
+//        try{
+//            //работает
+////            fileNameResource = this.getClass().getClassLoader().getResource("questions.csv").getFile();
+//            fileNameResource = this.getClass().getClassLoader().getResource("questions.csv").getFile();
+////            fileNameResource = this.getClass().getResource("/questions.csv").getFile();
+//        } catch (Exception e) {
+//            System.out.println("Troubles with getResource");
+//            e.printStackTrace();
+//        }
+        InputStream resourceAsStream = null;
+        try {
+            //мешал classpathPrefix lib/
+//            resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("questions.csv");
+            resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
+        } catch (Exception e) {
+            System.out.println("Troubles with resourceAsStream");
+            e.printStackTrace();
+        }
+        if (resourceAsStream == null) {
+            System.out.println("TROUBLES with Resource");
+            return null;
+        }
+//        if (fileNameResource.isEmpty()) return null;
+//        File file  = new File(fileNameResource);
+        try (CSVReader csvReader = new CSVReader(new InputStreamReader(resourceAsStream, "UTF-8"))) {
+//        try (CSVReader csvReader = new CSVReader(new FileReader(file), ',', '"', 0)) {
             String[] nextLine;
             int i = 0;
             while ((nextLine = csvReader.readNext()) != null) {

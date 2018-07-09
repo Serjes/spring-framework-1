@@ -16,24 +16,24 @@ public class QuestionDaoImplTest {
     private QuestionDaoImpl questionDao;
     private Properties prop = new Properties();
 
-    @Before
-    public void setUp() throws Exception {
-        try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTIES)) {
-            prop.load(fileInputStream);
-            String testFileName = prop.getProperty("csvfile.url");
-            questionDao = new QuestionDaoImpl(testFileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void findOneTest() {
-        Question question = questionDao.findOneTest(3);
-        HashSet<String> realAnswers = new HashSet<>();
-        Collections.addAll(realAnswers, " answer41", " answer42", " answer43", " answer44");
-        Assert.assertTrue("Here is the wrong question", question.getQuestion().equals("question4"));
-        Assert.assertTrue("Here is the wrong answer", question.getCorrectAnswer().equals(" answer41"));
-        Assert.assertTrue("Here is the wrong set of answers", question.getAnswers().containsAll(realAnswers));
-    }
+//    @Before
+//    public void setUp() throws Exception {
+//        try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTIES)) {
+//            prop.load(fileInputStream);
+//            String testFileName = prop.getProperty("csvfile.url");
+//            questionDao = new QuestionDaoImpl(testFileName);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @Test
+//    public void findOneTest() {
+//        Question question = questionDao.findOneTest(3);
+//        HashSet<String> realAnswers = new HashSet<>();
+//        Collections.addAll(realAnswers, " answer41", " answer42", " answer43", " answer44");
+//        Assert.assertTrue("Here is the wrong question", question.getQuestion().equals("question4"));
+//        Assert.assertTrue("Here is the wrong answer", question.getCorrectAnswer().equals(" answer41"));
+//        Assert.assertTrue("Here is the wrong set of answers", question.getAnswers().containsAll(realAnswers));
+//    }
 }

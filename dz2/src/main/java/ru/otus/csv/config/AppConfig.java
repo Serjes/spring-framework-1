@@ -15,7 +15,8 @@ import ru.otus.csv.service.TestingServiceImpl;
 
 import java.util.Locale;
 
-@PropertySource("classpath:application.properties")
+@PropertySource("${property.file:application.properties}")
+//@PropertySource("classpath:application.properties")
 @Configuration
 public class AppConfig {
 
