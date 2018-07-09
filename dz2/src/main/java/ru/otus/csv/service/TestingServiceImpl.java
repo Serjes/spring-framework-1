@@ -29,6 +29,10 @@ public class TestingServiceImpl implements TestingService{
         Person student = new Person(name, surname);
         for (int i = 0; i < 5; i++) {
             Question question = qService.getOneTest(i);
+            if (question == null){
+                printMessage("testing.error");
+                System.exit(1);
+            }
             printMessage("testing.question");
             System.out.printf("#%d %s %n", i + 1, question.getQuestion());
             printMessage("testing.answers");
