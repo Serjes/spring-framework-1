@@ -14,14 +14,11 @@ public class QuizServiceImpl implements QuizService {
 
     private final QuestionService qService;
     private final MessageSource messageSource;
-    private Locale locale;// = Locale.getDefault();
-//    private Locale locale = Locale.getDefault();
+    private Locale locale;
 
     public QuizServiceImpl(QuestionService qService, MessageSource messageSource) {
-//    public QuizServiceImpl(QuestionService qService, MessageSource messageSource, @Value("${local}")Locale local) {
         this.qService = qService;
         this.messageSource = messageSource;
-//        this.local = local;
     }
 
     @Override
@@ -76,7 +73,6 @@ public class QuizServiceImpl implements QuizService {
             case 1:
             default:
                 locale = Locale.getDefault(); //RU
-//                break;
         }
         Locale.setDefault(locale);
         return;
@@ -84,11 +80,6 @@ public class QuizServiceImpl implements QuizService {
     }
 
     void printMessage(String mes) {
-//        if (locale.equals(Locale.getDefault())) {
-//            System.out.println(messageSource.getMessage(mes, null, Locale.getDefault()) + ":");
-//        } else {
-//            System.out.println(messageSource.getMessage(mes, null, Locale.US) + ":");
-//        }
         if (Locale.getDefault().equals(Locale.US)) {
             System.out.println(messageSource.getMessage(mes, null, Locale.US) + ":");
         } else {

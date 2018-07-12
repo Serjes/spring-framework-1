@@ -21,6 +21,10 @@ public class QuestionDaoImpl implements QuestionDao {
 
     private final String[] fileName;
 
+    public String[] getFileName() {
+        return fileName;
+    }
+
     public QuestionDaoImpl(ApplicationSettings settings) {
 //    public QuestionDaoImpl(@Value("${application.csvfile}")String fileName) {
         this.fileName = settings.getCsvFile();

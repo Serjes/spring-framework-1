@@ -33,8 +33,8 @@ public class ApplicationSettings {
     @Bean
     MessageSource messageSource() {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
-        ms.setBasename(getMessageBundlePath());
 //        ms.setBasename("/i18n/bundle");
+        ms.setBasename(getMessageBundlePath());
         ms.setDefaultEncoding("UTF-8");
         return ms;
     }
