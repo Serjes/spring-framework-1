@@ -2,7 +2,9 @@ package ru.otus.dz4.dao;
 
 import au.com.bytecode.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import ru.otus.dz4.config.ApplicationSettings;
 import ru.otus.dz4.domain.Question;
 
 import java.io.FileNotFoundException;
@@ -12,14 +14,16 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 
 @Service
 public class QuestionDaoImpl implements QuestionDao {
 
-    private final String fileName;
+    private final String[] fileName;
 
-    public QuestionDaoImpl(@Value("${csvfile.url}")String fileName) {
-        this.fileName = fileName;
+    public QuestionDaoImpl(ApplicationSettings settings) {
+//    public QuestionDaoImpl(@Value("${application.csvfile}")String fileName) {
+        this.fileName = settings.getCsvFile();
     }
 
     @Override
@@ -27,7 +31,13 @@ public class QuestionDaoImpl implements QuestionDao {
         String question = "";
         String correctAnswer = "";
         ArrayList<String> answers = new ArrayList<>();
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
+        String file;
+        if (Locale.getDefault().equals(Locale.US)){
+            file = fileName[1];
+        } else {
+            file = fileName[0];
+        }
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(file);
         if (resourceAsStream == null) {
             return null;
         }

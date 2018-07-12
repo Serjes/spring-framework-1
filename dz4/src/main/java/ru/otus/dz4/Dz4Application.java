@@ -9,7 +9,9 @@ import ru.otus.dz4.service.QuizService;
 public class Dz4Application {
 
     public static void main(String[] args) {
+
         ApplicationContext context = SpringApplication.run(Dz4Application.class, args);
+
         QuizService quiz = context.getBean(QuizService.class);
         quiz.begin();
     }

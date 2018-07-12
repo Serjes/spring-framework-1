@@ -1,8 +1,4 @@
 application:
-  version: 1.0
-csvfile:
-  url: questions.csv
-local: ru_RU
-message:
-  base-name: /i18n/bundle
-  default-encoding: UTF-8
+  version: 1.1
+  csv-file: questions.csv,questions_en_US.csv
+  message-bundle-path: /i18n/bundle
