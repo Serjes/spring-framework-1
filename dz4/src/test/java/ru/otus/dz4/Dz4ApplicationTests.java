@@ -26,9 +26,6 @@ public class Dz4ApplicationTests {
         Assert.assertEquals("questions_en_US.csv", fileNames[1]);
     }
 
-    //	@Test
-//	public void contextLoads() {
-//	}
     @Test
     public void testApplicationSettings(){
         String[] files = settings.getCsvFile();

@@ -31,22 +31,6 @@ public class QuestionDaoImplTest {
     @Autowired
     private QuestionDaoImpl questionDao;
 
-//    private static final String PATH_TO_PROPERTIES = "src/test/resources/application.properties";
-//    private QuestionDaoImpl questionDao;
-//    private Properties prop = new Properties();
-
-//    @Before
-//    public void setUp() throws Exception {
-//
-////        try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTIES)) {
-////            prop.load(fileInputStream);
-////            String testFileName = prop.getProperty("csvfile.url");
-////            questionDao = new QuestionDaoImpl(testFileName);
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-//    }
-
     @Test
     public void findOneTest() {
         String[] files = new String[]{"testquestions.csv", "testquestions.csv"};
