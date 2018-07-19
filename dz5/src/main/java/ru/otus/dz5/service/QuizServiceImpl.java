@@ -1,6 +1,5 @@
 package ru.otus.dz5.service;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import ru.otus.dz5.domain.Person;
@@ -26,7 +25,6 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void begin() {
         int score = 0;
-        languageSelect();
         printMessage("user.name");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
@@ -61,24 +59,6 @@ public class QuizServiceImpl implements QuizService {
         printMessage("user.score");
         System.out.println(student.getScore());
         return;
-    }
-
-    private void languageSelect() {
-        System.out.println("Выберете язык\\Choose language:\n 1 - Русский\n 2 - English");
-        System.out.print(">");
-        Scanner sc = new Scanner(System.in);
-        int userSelection = sc.nextInt();
-        switch (userSelection) {
-            case 2:
-                locale = Locale.US;
-                break;
-            case 1:
-            default:
-                locale = Locale.getDefault(); //RU
-        }
-        Locale.setDefault(locale);
-        return;
-
     }
 
     void printMessage(String mes) {

@@ -12,7 +12,7 @@ public class Dz5Application {
 
         ApplicationContext context = SpringApplication.run(Dz5Application.class, args);
 
-        QuizService quiz = context.getBean(QuizService.class);
-        quiz.begin();
+//        QuizService quiz = context.getBean(QuizService.class);
+//        quiz.begin();
     }
 }
