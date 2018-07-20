@@ -15,7 +15,6 @@ public class QuizServiceImpl implements QuizService {
 
     private final QuestionService qService;
     private final MessageSource messageSource;
-//    private Locale locale;
 
     public QuizServiceImpl(QuestionService qService, MessageSource messageSource) {
         this.qService = qService;
@@ -65,10 +64,8 @@ public class QuizServiceImpl implements QuizService {
     public String printMessage(String mes) {
         if (Locale.getDefault().equals(Locale.US)) {
             return messageSource.getMessage(mes, null, Locale.US) + ":";
-//            System.out.println(messageSource.getMessage(mes, null, Locale.US) + ":");
         } else {
             return messageSource.getMessage(mes, null, new Locale("ru_RU")) + ":";
-//            System.out.println(messageSource.getMessage(mes, null, new Locale("ru_RU")) + ":");
         }
     }
 

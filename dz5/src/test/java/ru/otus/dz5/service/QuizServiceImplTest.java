@@ -32,6 +32,7 @@ public class QuizServiceImplTest {
     public void printMessage() {
         Mockito.when(this.messageSource.getMessage("user.name", null, Locale.US)).thenReturn("Enter your name");
         Mockito.when(this.messageSource.getMessage("user.name", null, new Locale("ru_RU"))).thenReturn("Введите свое имя");
+
         QuizService quizService = new QuizServiceImpl(qService,messageSource);
         assertEquals("Here is the wrong message", "Введите свое имя:", quizService.printMessage("user.name"));
         Locale.setDefault(Locale.US);

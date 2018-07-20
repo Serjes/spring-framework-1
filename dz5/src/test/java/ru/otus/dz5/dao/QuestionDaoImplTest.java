@@ -24,7 +24,6 @@ import static org.junit.Assert.*;
 
 @SpringBootApplication
 @RunWith(SpringRunner.class)
-//@SpringBootTest
 public class QuestionDaoImplTest {
 
     @MockBean
