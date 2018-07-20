@@ -19,13 +19,12 @@ public class QuizCommands {
 
     @ShellMethod("Begin Quiz")
     public void begin() {
-        // invoke service
         qService.begin();
         return;
     }
 
-    @ShellMethod("Select language")
-    public void select(){
+    @ShellMethod("Select language for Quiz")
+    public void selectLang(){
         languageService.select();
     }
 }

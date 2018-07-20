@@ -10,9 +10,7 @@ public class Dz5Application {
 
     public static void main(String[] args) {
 
-        ApplicationContext context = SpringApplication.run(Dz5Application.class, args);
+        SpringApplication.run(Dz5Application.class, args);
 
-//        QuizService quiz = context.getBean(QuizService.class);
-//        quiz.begin();
     }
 }

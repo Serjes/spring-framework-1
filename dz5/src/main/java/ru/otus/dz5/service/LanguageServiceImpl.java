@@ -8,6 +8,7 @@ import java.util.Scanner;
 @Service
 public class LanguageServiceImpl implements LanguageService {
     private Locale locale;
+
     @Override
     public void select() {
         System.out.println("Выберете язык\\Choose language:\n 1 - Русский\n 2 - English");
