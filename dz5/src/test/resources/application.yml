@@ -1,0 +1,4 @@
+application:
+  version: 1.1
+  csv-file: questions.csv,questions_en_US.csv
+  message-bundle-path: /i18n/bundle
