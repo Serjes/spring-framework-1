@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import ru.otus.dz6.dao.PersonDao;
 import ru.otus.dz6.domain.Person;
+import ru.otus.dz6.service.BooksService;
 
 @SpringBootApplication
 public class Main {
@@ -13,7 +14,10 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         ApplicationContext context = SpringApplication.run(Main.class);
-        PersonDao dao = context.getBean(PersonDao.class);
+
+        BooksService service = context.getBean(BooksService.class);
+        service.start();
+//        PersonDao dao = context.getBean(PersonDao.class);
 
 //        System.out.println("All count " + dao.count());
 //
