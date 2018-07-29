@@ -15,8 +15,10 @@ public class Main {
 
         ApplicationContext context = SpringApplication.run(Main.class);
 
-        BooksService service = context.getBean(BooksService.class);
-        service.start();
+//        BooksService service = context.getBean(BooksService.class);
+//        service.start();
+
+
 //        PersonDao dao = context.getBean(PersonDao.class);
 
 //        System.out.println("All count " + dao.count());

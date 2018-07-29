@@ -16,5 +16,6 @@ public class BooksServiceImpl implements BooksService {
     @Override
     public void start() {
         bookDao.insert(new Book(1, "Азазель", 1, 1));
+        System.out.println("Book have been inserted");
     }
 }
