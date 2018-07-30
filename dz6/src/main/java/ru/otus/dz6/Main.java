@@ -18,7 +18,6 @@ public class Main {
 //        BooksService service = context.getBean(BooksService.class);
 //        service.start();
 
-
 //        PersonDao dao = context.getBean(PersonDao.class);
 
 //        System.out.println("All count " + dao.count());
@@ -31,6 +30,6 @@ public class Main {
 //
 //        System.out.println("Ivan id: " + ivan.getId() + " name: " + ivan.getName());
 
-        Console.main(args);
+//        Console.main(args);
     }
 }
