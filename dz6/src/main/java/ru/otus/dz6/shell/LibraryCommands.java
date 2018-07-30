@@ -38,5 +38,11 @@ public class LibraryCommands {
             @ShellOption String author){
 
         System.out.println("Книга: " + bookName + " " + genre + " " + author);
+        booksService.addBook(bookName, genre, author);
+    }
+
+    @ShellMethod("View all books")
+    public void viewAll(){
+        booksService.view();
     }
 }
