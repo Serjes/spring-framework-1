@@ -8,6 +8,8 @@ import ru.otus.dz6.domain.Author;
 import ru.otus.dz6.domain.Book;
 import ru.otus.dz6.domain.Genre;
 
+import java.util.List;
+
 @Service
 public class BooksServiceImpl implements BooksService {
 
@@ -36,11 +38,21 @@ public class BooksServiceImpl implements BooksService {
 
     @Override
     public void view() {
-
+        List<Book> allBooks = bookDao.getAll();
+        int i = 1;
+        for (Book book : allBooks) {
+//            int idAuthor = book.getIdAuthor();
+            Author author = authorDao.getById(book.getIdAuthor());
+            Genre genre = genreDao.getById(book.getIdGenre());
+            System.out.printf("%d) ",i);
+            System.out.println("Книга: " + book.getName() + ", автор: " + author.getName() + ", жанр: " + genre.getName());
+            i++;
+        }
     }
 
-//    @Override
-//    public void addBook() {
-//        bookDao.insert(new Book(2, ));
-//    }
+    @Override
+    public void count() {
+        System.out.println("Количество книг в библиотеке: " + bookDao.count());
+    }
+
 }

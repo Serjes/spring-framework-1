@@ -7,4 +7,6 @@ public interface BooksService {
     void addBook(String name, String genre, String author);
 
     void view();
+
+    void count();
 }
