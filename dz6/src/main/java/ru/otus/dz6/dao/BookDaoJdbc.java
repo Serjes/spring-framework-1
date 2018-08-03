@@ -14,23 +14,36 @@ import java.util.List;
 @Repository
 public class BookDaoJdbc implements BookDao {
 
-    private final JdbcOperations jdbc;
+//    private final JdbcOperations jdbc;
     private final NamedParameterJdbcOperations npjdbc;
 
-    public BookDaoJdbc(JdbcOperations jdbc, NamedParameterJdbcOperations npjdbc) {
-        this.jdbc = jdbc;
+//    public BookDaoJdbc(JdbcOperations jdbc, NamedParameterJdbcOperations npjdbc) {
+    public BookDaoJdbc(NamedParameterJdbcOperations npjdbc) {
+//        this.jdbc = jdbc;
         this.npjdbc = npjdbc;
     }
 
     @Override
     public void insert(Book book) {
-        jdbc.update("insert into books (id, `name`, `author_id`, `genre_id`) values (?, ?, ?, ?)",
-                book.getId(), book.getName(), book.getIdAuthor(), book.getIdGenre());
+        final HashMap<String, Object> params = new HashMap<>(1);
+//        params.put("id", book.getId());
+        params.put("name", book.getName());
+        params.put("idAuthor", book.getIdAuthor());
+        params.put("idGenre", book.getIdGenre());
+//        jdbc.update("insert into books (id, `name`, `author_id`, `genre_id`) values (?, ?, ?, ?)",
+//                book.getId(), book.getName(), book.getIdAuthor(), book.getIdGenre());
+
+//        npjdbc.update("insert into books (id, `name`, `author_id`, `genre_id`) " +
+//                        "values (:id, :name, :idAuthor, :idGenre)", params);
+        npjdbc.update("insert into books ( `name`, `author_id`, `genre_id`) " +
+                        "values ( :name, :idAuthor, :idGenre)", params);
     }
 
     @Override
     public List<Book> getAll(){
-        return jdbc.query("select * from books", new BookMapper());
+//        return npjdbc.query("select * from books", new BookMapper());
+        return npjdbc.query("select books.id, books.name, books.author_id, books.genre_id, authors.name  from books join authors on books.author_id = authors.id ", new BookMapper());
+
     }
 
     @Override
@@ -43,11 +56,12 @@ public class BookDaoJdbc implements BookDao {
 
         @Override
         public Book mapRow(ResultSet resultSet, int i) throws SQLException {
-            int id = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            int idAuthor = resultSet.getInt("author_id");
-            int idGenre = resultSet.getInt("genre_id");
-            return new Book(id, name, idAuthor, idGenre);
+            int id = resultSet.getInt("books.id");
+            String name = resultSet.getString("books.name");
+            int idAuthor = resultSet.getInt("books.author_id");
+            int idGenre = resultSet.getInt("books.genre_id");
+            String author = resultSet.getString("authors.name");
+            return new Book(id, name, idAuthor, idGenre, author);
         }
     }
 }

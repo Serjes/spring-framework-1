@@ -16,9 +16,9 @@ public class LibraryCommands {
         this.booksService = booksService;
     }
 
-    @ShellMethod("minimal Library initialization")
+    @ShellMethod("Add one template book")
     public void init() {
-        booksService.start();
+        booksService.addTemplateBook();
         return;
     }
 
