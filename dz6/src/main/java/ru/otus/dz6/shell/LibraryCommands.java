@@ -31,13 +31,13 @@ public class LibraryCommands {
         }
     }
 
-    @ShellMethod("Adding a book to the Library: add book_name --genre genre_name --author author_name")
+    @ShellMethod("Adding a book to the Library: add book_name --author author_name --genre genre_name")
     public void add(
             @ShellOption String bookName,
-            @ShellOption String genre,
-            @ShellOption String author){
+            @ShellOption String author,
+            @ShellOption String genre){
 
-        System.out.println("Добавляем книгу: " + bookName + " " + genre + " " + author);
+        System.out.println("Добавляем книгу: " + bookName + " " + author + " " + genre);
         booksService.addBook(bookName, genre, author);
     }
 

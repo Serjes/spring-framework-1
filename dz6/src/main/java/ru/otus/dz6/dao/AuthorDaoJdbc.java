@@ -1,5 +1,6 @@
 package ru.otus.dz6.dao;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,18 @@ public class AuthorDaoJdbc implements AuthorDao {
                 "select * from authors where id =:id",
                 params, new AuthorMapper()
         );
+    }
+
+    @Override
+    public int getByName(String authorName) {
+        final HashMap<String, Object> params = new HashMap<>(1);
+        params.put("name", authorName);
+        try {
+            Author author = npjdbc.queryForObject("select id from authors where name = :name", params, new AuthorMapper());
+            return author.getId();
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
     }
 
     private static class AuthorMapper implements RowMapper<Author> {

@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.otus.dz6.dao.BookDao;
@@ -18,7 +20,8 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-@SpringBootApplication
+@SpringBootTest
+//@SpringBootApplication
 @RunWith(SpringRunner.class)
 public class BooksServiceImplTest {
 
@@ -42,6 +45,9 @@ public class BooksServiceImplTest {
     @MockBean
     private BookDao bookDao;
 
+    @Autowired
+    private BooksServiceImpl booksService;
+
     @Test
     public void addTemplateBook() {
     }
@@ -52,12 +58,11 @@ public class BooksServiceImplTest {
 
     @Test
     public void view() {
-//        List<Book> books = new ArrayList<>();
-//        books.add(new Book());
-//        Mockito.when(this.bookDao.getAll()).thenReturn(new List<Book>() {
-//        });
-//        assertEquals("1) Книга: Азазель, автор: Б.Акунин, жанр: детектив",
-//                outContent.toString());
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(1,"Азазель", "Б.Акунин", "детектив"));
+        Mockito.when(this.bookDao.getAll()).thenReturn(books);
+        booksService.view();
+        assertEquals("1) Книга: Азазель, автор: Б.Акунин, жанр: детектив\r\n", outContent.toString());
     }
 
     @Test
