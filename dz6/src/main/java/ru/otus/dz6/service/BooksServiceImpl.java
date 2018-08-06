@@ -24,58 +24,43 @@ public class BooksServiceImpl implements BooksService {
     }
 
     @Override
-    public void addTemplateBook() {
-//        bookDao.insert(new Book(1, "Азазель", 1, 1));
-        bookDao.insert(new Book(1, "Азазель", "Б.Акунин", "детектив"));
-        System.out.println("Book have been inserted");
-    }
-
-    @Override
     public void addBook(String name, String authorName, String genreName) {
 //        System.out.println("id author: " + authorDao.getByName(author));
         int authorId = authorDao.getByName(authorName);
         if (authorId == 0) {
-            authorDao.insert(new Author(1,authorName));
-            authorId = authorDao.getByName(authorName);
+            System.out.println("Возникли проблемы с базой при добавлении новой книги");
+            return;
         }
         int genreId = genreDao.getByName(genreName);
         if (genreId == 0) {
-            genreDao.insert(new Genre(1,genreName));
-            genreId = genreDao.getByName(genreName);
+            System.out.println("Возникли проблемы с базой при добавлении новой книги");
+            return;
         }
-//        bookDao.insert(new Book(1, name, authorId, genreId));
-        bookDao.insert(new Book(1, name, authorName, genreName));
+//        bookDao.insert(new Book(name, authorName, genreName));
+        bookDao.insert(new Book(1, name, authorId, genreId));
+    }
 
-//        authorDao.insert(new Author(1, author));
-//        genreDao.insert(new Genre(1, genre));
-//        bookDao.insert(new Book(1, name, 2, 2));
+    @Override
+    public void addTemplateBook() {
+        addBook("Азазель", "Б.Акунин", "детектив");
     }
 
     @Override
     public void view() {
         List<Book> allBooks = bookDao.getAll();
-        int i = 1;
-        for (Book book : allBooks
-                ) {
-//            System.out.println("Книга: " + book.getName() + " автор:"+ book.getAuthorName());
-            System.out.printf("%d) ",i);
-            System.out.println("Книга: " + book.getName() + ", автор: " + book.getAuthorName() + ", жанр: " + book.getGenreName());
-            i++;
-
+        for (Book book : allBooks) {
+            System.out.println("ID:" + book.getId() + " название: \"" + book.getName() + "\", автор: " + book.getAuthorName() + ", жанр: " + book.getGenreName());
         }
-//        int i = 1;
-//        for (Book book : allBooks) {
-//            Author author = authorDao.getById(book.getIdAuthor());
-//            Genre genre = genreDao.getById(book.getIdGenre());
-//            System.out.printf("%d) ",i);
-//            System.out.println("Книга: " + book.getName() + ", автор: " + author.getName() + ", жанр: " + genre.getName());
-//            i++;
-//        }
     }
 
     @Override
     public void count() {
         System.out.println("Количество книг в библиотеке: " + bookDao.count());
+    }
+
+    @Override
+    public void delBook(int id) {
+        bookDao.deleteById(id);
     }
 
 }

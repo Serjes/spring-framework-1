@@ -22,9 +22,7 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public void insert(Author author) {
         final HashMap<String, Object> params = new HashMap<>(1);
-//        params.put("id", author.getId());
         params.put("name", author.getName());
-//        npjdbc.update("insert into authors (id, `name`) values (:id, :name )", params);
         npjdbc.update("insert into authors (`name`) values (:name )", params);
     }
 
@@ -43,10 +41,16 @@ public class AuthorDaoJdbc implements AuthorDao {
         final HashMap<String, Object> params = new HashMap<>(1);
         params.put("name", authorName);
         try {
-            Author author = npjdbc.queryForObject("select id from authors where name = :name", params, new AuthorMapper());
+            Author author = npjdbc.queryForObject("select * from authors where name = :name", params, new AuthorMapper());
             return author.getId();
         } catch (EmptyResultDataAccessException e) {
-            return 0;
+            insert(new Author(1, authorName));
+            try {
+                Author createdAuthor = npjdbc.queryForObject("select * from authors where name = :name", params, new AuthorMapper());
+                return createdAuthor.getId();
+            }catch (EmptyResultDataAccessException ex) {
+                return 0;
+            }
         }
     }
 

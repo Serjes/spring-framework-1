@@ -23,26 +23,16 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public void insert(Book book) {
-
-//        int authorId = authorDao.getByName(authorName);
-//        if (authorId == 0) {
-//            authorDao.insert(new Author(1,authorName));
-//            authorId = authorDao.getByName(authorName);
-//        }
-
         final HashMap<String, Object> params = new HashMap<>(1);
         params.put("name", book.getName());
-//        params.put("idAuthor", book.getIdAuthor());
-//        params.put("idGenre", book.getIdGenre());
-        params.put("idAuthor", 1);
-        params.put("idGenre", 1);
+        params.put("idAuthor", book.getIdAuthor());
+        params.put("idGenre", book.getIdGenre());
         npjdbc.update("insert into books ( `name`, `author_id`, `genre_id`) " +
                         "values ( :name, :idAuthor, :idGenre)", params);
     }
 
     @Override
     public List<Book> getAll(){
-//        return npjdbc.query("select * from books", new BookMapper());
         return npjdbc.query("select books.id, books.name, authors.name, genres.name  from books " +
                 "join authors on books.author_id = authors.id " +
                 "join genres on books.genre_id = genres.id", new BookMapper());
@@ -55,19 +45,22 @@ public class BookDaoJdbc implements BookDao {
         return npjdbc.queryForObject("select count(*) from books", params, Integer.class);
     }
 
+    @Override
+    public void deleteById(int id) {
+        final HashMap<String, Object> params = new HashMap<>(1);
+        params.put("id", id);
+        npjdbc.update("delete from books where id = :id", params);
+    }
+
     private static class BookMapper implements RowMapper<Book> {
 
         @Override
         public Book mapRow(ResultSet resultSet, int i) throws SQLException {
             int id = resultSet.getInt("books.id");
             String name = resultSet.getString("books.name");
-//            int idAuthor = resultSet.getInt("books.author_id");
-//            int idGenre = resultSet.getInt("books.genre_id");
             String author = resultSet.getString("authors.name");
             String genre = resultSet.getString("genres.name");
             return new Book(id, name, author, genre);
-//            return new Book(id, name, idAuthor, idGenre, author);
-
         }
     }
 }

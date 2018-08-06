@@ -9,4 +9,6 @@ public interface BooksService {
     void view();
 
     void count();
+
+    void delBook(int id);
 }

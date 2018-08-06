@@ -1,7 +1,6 @@
 package ru.otus.dz6.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
@@ -13,6 +12,7 @@ import java.util.HashMap;
 
 @Repository
 public class GenreDaoJdbc implements GenreDao {
+
     private final NamedParameterJdbcOperations npjdbc;
 
     public GenreDaoJdbc(NamedParameterJdbcOperations npjdbc) {
@@ -41,10 +41,16 @@ public class GenreDaoJdbc implements GenreDao {
         final HashMap<String, Object> params = new HashMap<>(1);
         params.put("name", genreName);
         try {
-            Genre genre = npjdbc.queryForObject("select id from genres where name = :name", params, new GenreMapper());
+            Genre genre = npjdbc.queryForObject("select * from genres where name = :name", params, new GenreMapper());
             return genre.getId();
         } catch (EmptyResultDataAccessException e) {
-            return 0;
+            insert(new Genre(1, genreName));
+            try {
+                Genre createdGenre = npjdbc.queryForObject("select * from genres where name = :name", params, new GenreMapper());
+                return createdGenre.getId();
+            }catch (EmptyResultDataAccessException ex) {
+                return 0;
+            }
         }
     }
 

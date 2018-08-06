@@ -1,6 +1,9 @@
+application:
+  version: 1.0t
 spring:
   shell:
     interactive:
       enabled: false
   datasource:
-    url: jdbc:h2:mem:testdb2
+    url: jdbc:h2:mem:test
+#    initialization-mode: always

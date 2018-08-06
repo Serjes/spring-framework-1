@@ -16,13 +16,8 @@ public class LibraryCommands {
         this.booksService = booksService;
     }
 
-    @ShellMethod("Add one template book")
-    public void init() {
-        booksService.addTemplateBook();
-        return;
-    }
-
-    @ShellMethod("Running of the DB-console")
+    @ShellMethod("Запустить консоль H2DB")
+//    @ShellMethod("Running of the DB-console")
     public void runConsole(){
         try {
             Console.main("-browser");
@@ -31,23 +26,40 @@ public class LibraryCommands {
         }
     }
 
-    @ShellMethod("Adding a book to the Library: add book_name --author author_name --genre genre_name")
+    @ShellMethod("Добавить книгу в библиотеку: add book_name --author author_name --genre genre_name")
+//    @ShellMethod("Adding a book to the Library: add book_name --author author_name --genre genre_name")
     public void add(
             @ShellOption String bookName,
             @ShellOption String author,
             @ShellOption String genre){
 
-        System.out.println("Добавляем книгу: " + bookName + " " + author + " " + genre);
-        booksService.addBook(bookName, genre, author);
+        System.out.println("Добавляем книгу: \"" + bookName + "\" " + author + " " + genre);
+        booksService.addBook(bookName, author, genre);
     }
 
-    @ShellMethod("View all books")
+    @ShellMethod("Добавить шаблонную книгу")
+//    @ShellMethod("Add one template book")
+    public void addt() {
+        booksService.addTemplateBook();
+        System.out.println("Добавляем книгу: \"Азазель\", Б.Акунин, детектив");
+        return;
+    }
+
+    @ShellMethod("Показать все книги в библиотеке")
+//    @ShellMethod("View all books")
     public void viewAll(){
         booksService.view();
     }
 
-    @ShellMethod("Count books")
+    @ShellMethod("Вывести количество книг в библитеке")
+//    @ShellMethod("Count books")
     public void count(){
         booksService.count();
+    }
+
+    @ShellMethod("Удалить книгу по номеру ID: dell id_number")
+    public void del(
+            @ShellOption int id){
+        booksService.delBook(id);
     }
 }

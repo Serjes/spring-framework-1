@@ -29,15 +29,15 @@ public class QuestionDaoImplTest {
     @MockBean
     private ApplicationSettings applicationSettings;
 
-    @Autowired
-    private QuestionDaoImpl questionDao;
+//    @Autowired
+//    private QuestionDaoImpl questionDao;
 
     @Test
     public void findOneTest() {
         String[] files = new String[]{"testquestions.csv", "testquestions.csv"};
         Mockito.when(this.applicationSettings.getCsvFile()).thenReturn(files);
 
-        questionDao = new QuestionDaoImpl(applicationSettings);
+        QuestionDao questionDao = new QuestionDaoImpl(applicationSettings);
         Question question = questionDao.findOneTest(3);
         HashSet<String> realAnswers = new HashSet<>();
         Collections.addAll(realAnswers, " answer41", " answer42", " answer43", " answer44");
