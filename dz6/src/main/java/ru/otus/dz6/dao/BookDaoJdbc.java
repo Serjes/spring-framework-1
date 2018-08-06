@@ -1,10 +1,8 @@
 package ru.otus.dz6.dao;
 
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
-import ru.otus.dz6.domain.Author;
 import ru.otus.dz6.domain.Book;
 
 import java.sql.ResultSet;

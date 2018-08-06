@@ -25,7 +25,6 @@ public class BooksServiceImpl implements BooksService {
 
     @Override
     public void addBook(String name, String authorName, String genreName) {
-//        System.out.println("id author: " + authorDao.getByName(author));
         int authorId = authorDao.getByName(authorName);
         if (authorId == 0) {
             System.out.println("Возникли проблемы с базой при добавлении новой книги");
@@ -36,7 +35,6 @@ public class BooksServiceImpl implements BooksService {
             System.out.println("Возникли проблемы с базой при добавлении новой книги");
             return;
         }
-//        bookDao.insert(new Book(name, authorName, genreName));
         bookDao.insert(new Book(1, name, authorId, genreId));
     }
 

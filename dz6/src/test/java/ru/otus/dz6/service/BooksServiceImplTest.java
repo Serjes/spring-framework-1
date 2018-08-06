@@ -6,11 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.shell.jline.InteractiveShellApplicationRunner;
-import org.springframework.shell.jline.ScriptShellApplicationRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.otus.dz6.dao.BookDao;
 import ru.otus.dz6.domain.Book;
@@ -23,7 +20,6 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @SpringBootTest
-//@SpringBootApplication
 //@SpringBootTest(properties={
 //        InteractiveShellApplicationRunner.SPRING_SHELL_INTERACTIVE_ENABLED + "=false",
 //        ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT_ENABLED + "=false"
@@ -55,27 +51,11 @@ public class BooksServiceImplTest {
     private BooksServiceImpl booksService;
 
     @Test
-    public void addTemplateBook() {
-    }
-
-    @Test
-    public void addBook() {
-    }
-
-    @Test
     public void view() {
         List<Book> books = new ArrayList<>();
         books.add(new Book(1,"Азазель", "Б.Акунин", "детектив"));
         Mockito.when(this.bookDao.getAll()).thenReturn(books);
         booksService.view();
         assertEquals("ID:1 название: \"Азазель\", автор: Б.Акунин, жанр: детектив\r\n", outContent.toString());
-    }
-
-    @Test
-    public void count() {
-    }
-
-    @Test
-    public void delBook() {
     }
 }
