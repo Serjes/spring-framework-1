@@ -1,6 +1,6 @@
 package ru.otus.dz8.shell;
 
-import org.h2.tools.Console;
+//import org.h2.tools.Console;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
@@ -16,15 +16,15 @@ public class LibraryCommands {
         this.booksService = booksService;
     }
 
-    @ShellMethod("Запустить консоль H2DB")
-//    @ShellMethod("Running of the DB-console")
-    public void runConsole(){
-        try {
-            Console.main("-browser");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    @ShellMethod("Запустить консоль H2DB")
+////    @ShellMethod("Running of the DB-console")
+//    public void runConsole(){
+//        try {
+//            Console.main("-browser");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @ShellMethod("Добавить книгу в библиотеку: add book_name --author author_name --genre genre_name")
 //    @ShellMethod("Adding a book to the Library: add book_name --author author_name --genre genre_name")

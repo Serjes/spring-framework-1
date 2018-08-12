@@ -1,21 +1,23 @@
 package ru.otus.dz8.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "genres")
 public class Genre {
 
     @Id
     @GeneratedValue
-    private final int id;
-    private final String name;
+    private int id;
+    private String name;
 
-    public Genre(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+//    @OneToOne(orphanRemoval = true)
+//    private Book book;
+
+//    public Genre(int id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
 
     public String getName() {
         return name;
