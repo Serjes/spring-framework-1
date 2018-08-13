@@ -25,8 +25,8 @@ public class QuizServiceImplTest {
     @MockBean
     private MessageSource messageSource;
 
-    @Autowired
-    private QuizServiceImpl quizService;
+//    @Autowired
+//    private QuizServiceImpl quizService;
 
     @Test
     public void printMessage() {

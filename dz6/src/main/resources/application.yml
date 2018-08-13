@@ -1,0 +1,9 @@
+application:
+  version: 1.0
+spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+  h2:
+    console:
+      enabled: true
+#      path: localhost:8080/h2-console/
