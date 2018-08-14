@@ -9,7 +9,7 @@ public interface BookRepository {
 
     List<Book> getAll();
 
-    int count();
+    long count();
 
     Book getById(int id);
 

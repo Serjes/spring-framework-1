@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
+@SuppressWarnings("JpaQlInspection")
 public class BookRepositoryJpa implements BookRepository {
 
     @PersistenceContext
@@ -26,13 +27,13 @@ public class BookRepositoryJpa implements BookRepository {
     }
 
     @Override
-    public int count() {
-        return entityManager.createQuery("select count(b) from Book b").getFirstResult();
+    public long count() {
+        return (long)entityManager.createQuery("select count(b.id) from Book b").getSingleResult();//.getFirstResult();
     }
 
     @Override
     public Book getById(int id) {
-        return null;
+        return entityManager.find(Book.class, id);
     }
 
     @Override

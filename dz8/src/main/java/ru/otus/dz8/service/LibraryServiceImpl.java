@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 //import ru.otus.dz8.dao.AuthorDao;
 //import ru.otus.dz8.dao.BookDao;
 //import ru.otus.dz8.dao.GenreDao;
+import ru.otus.dz8.domain.Author;
 import ru.otus.dz8.domain.Book;
+import ru.otus.dz8.domain.Genre;
 import ru.otus.dz8.repository.BookRepositoryJpa;
 
 import java.util.List;
 
 @Service
-public class BooksServiceImpl implements BooksService {
+public class LibraryServiceImpl implements LibraryService {
 
     @Autowired
     private BookRepositoryJpa bookRepositoryJpa;
@@ -23,13 +25,20 @@ public class BooksServiceImpl implements BooksService {
     }
 
     @Override
-    public void addBook(String name, String genre, String author) {
-
+    public void addBook(String name, String authorName, String genreName) {
+        Author author = new Author(authorName);
+        Genre genre = new Genre(genreName);
+        Book book = new Book(name, author, genre);
+        bookRepositoryJpa.insert(book);
     }
 
     @Override
     public void view() {
-
+        List<Book> books = bookRepositoryJpa.getAll();
+        for (Book book : books) {
+            System.out.println("ID:" + book.getId() + " название: \"" + book.getName() + "\", автор: "
+                    + book.getAuthor().getName() + ", жанр: " + book.getGenre().getName());
+        }
     }
 
     @Override
@@ -46,7 +55,7 @@ public class BooksServiceImpl implements BooksService {
 //    private final AuthorDao authorDao;
 //    private final GenreDao genreDao;
 //
-//    public BooksServiceImpl(BookDao bookDao, AuthorDao authorDao, GenreDao genreDao) {
+//    public LibraryServiceImpl(BookDao bookDao, AuthorDao authorDao, GenreDao genreDao) {
 //        this.bookDao = bookDao;
 //        this.authorDao = authorDao;
 //        this.genreDao = genreDao;

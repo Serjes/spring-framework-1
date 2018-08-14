@@ -4,20 +4,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 //import ru.otus.dz8.dao.BookDao;
-import ru.otus.dz8.domain.Book;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 @SpringBootTest
 //@SpringBootTest(properties={
@@ -25,7 +18,7 @@ import static org.junit.Assert.*;
 //        ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT_ENABLED + "=false"
 //})
 @RunWith(SpringRunner.class)
-public class BooksServiceImplTest {
+public class LibraryServiceImplTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -48,7 +41,7 @@ public class BooksServiceImplTest {
 //    private BookDao bookDao;
 
     @Autowired
-    private BooksServiceImpl booksService;
+    private LibraryServiceImpl booksService;
 
     @Test
     public void view() {

@@ -4,16 +4,14 @@ package ru.otus.dz8.shell;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.otus.dz8.service.BooksService;
-
-import java.sql.SQLException;
+import ru.otus.dz8.service.LibraryService;
 
 @ShellComponent
 public class LibraryCommands {
-    private final BooksService booksService;
+    private final LibraryService libraryService;
 
-    public LibraryCommands(BooksService booksService) {
-        this.booksService = booksService;
+    public LibraryCommands(LibraryService libraryService) {
+        this.libraryService = libraryService;
     }
 
 //    @ShellMethod("Запустить консоль H2DB")
@@ -34,13 +32,13 @@ public class LibraryCommands {
             @ShellOption String genre){
 
         System.out.println("Добавляем книгу: \"" + bookName + "\" " + author + " " + genre);
-        booksService.addBook(bookName, author, genre);
+        libraryService.addBook(bookName, author, genre);
     }
 
     @ShellMethod("Добавить шаблонную книгу")
 //    @ShellMethod("Add one template book")
     public void addt() {
-        booksService.addTemplateBook();
+        libraryService.addTemplateBook();
         System.out.println("Добавляем книгу: \"Азазель\", Б.Акунин, детектив");
         return;
     }
@@ -48,18 +46,18 @@ public class LibraryCommands {
     @ShellMethod("Показать все книги в библиотеке")
 //    @ShellMethod("View all books")
     public void viewAll(){
-        booksService.view();
+        libraryService.view();
     }
 
     @ShellMethod("Вывести количество книг в библитеке")
 //    @ShellMethod("Count books")
     public void count(){
-        booksService.count();
+        libraryService.count();
     }
 
     @ShellMethod("Удалить книгу по номеру ID: dell id_number")
     public void del(
             @ShellOption int id){
-        booksService.delBook(id);
+        libraryService.delBook(id);
     }
 }

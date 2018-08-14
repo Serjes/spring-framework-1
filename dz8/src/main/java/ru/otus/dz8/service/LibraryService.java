@@ -1,6 +1,6 @@
 package ru.otus.dz8.service;
 
-public interface BooksService {
+public interface LibraryService {
 
     void addTemplateBook();
 

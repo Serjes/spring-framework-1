@@ -7,21 +7,28 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue
+//    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AUTHOR_ID")
+//    @OneToOne
     private Author author;
 //    private int idAuthor;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "GENRE_ID")
+//    @OneToOne
     private Genre genre;
 //    private int idGenre;
 //    private String authorName;
 //    private String genreName;
+
+
+    public Book() {
+    }
 
     public Book(String name, Author author, Genre genre) {
         this.name = name;
@@ -29,8 +36,15 @@ public class Book {
         this.genre = genre;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
 
-//    public Book(int id, String name, int idAuthor, int idGenre) {
+    public Genre getGenre() {
+        return genre;
+    }
+
+    //    public Book(int id, String name, int idAuthor, int idGenre) {
 //        this.id = id;
 //        this.name = name;
 //        this.idAuthor = idAuthor;
