@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.dz8.domain.Author;
 import ru.otus.dz8.domain.Book;
 import ru.otus.dz8.domain.Genre;
+import ru.otus.dz8.repository.AuthorRepositoryJpa;
 import ru.otus.dz8.repository.BookRepositoryJpa;
 
 import java.util.List;
@@ -18,17 +19,28 @@ public class LibraryServiceImpl implements LibraryService {
     @Autowired
     private BookRepositoryJpa bookRepositoryJpa;
 
+    @Autowired
+    private AuthorRepositoryJpa authorRepositoryJpa;
+
 
     @Override
     public void addTemplateBook() {
-
+        addBook("Азазель", "Б.Акунин", "детектив");
     }
 
     @Override
     public void addBook(String name, String authorName, String genreName) {
-        Author author = new Author(authorName);
+        Author author = authorRepositoryJpa.getByName(authorName);
+        if (author == null) {
+            author = new Author(authorName);
+//            authorRepositoryJpa.insert(author);
+        }
+
+//        Author author = new Author(authorName);
         Genre genre = new Genre(genreName);
         Book book = new Book(name, author, genre);
+
+
         bookRepositoryJpa.insert(book);
     }
 
@@ -48,7 +60,12 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void delBook(int id) {
+        bookRepositoryJpa.deleteById(id);
+    }
 
+    @Override
+    public void printAuthorId(String name) {
+        System.out.println("id: " + authorRepositoryJpa.getByName(name).getId());
     }
 
 //    private final BookDao bookDao;

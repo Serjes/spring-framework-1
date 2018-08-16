@@ -11,4 +11,6 @@ public interface LibraryService {
     void count();
 
     void delBook(int id);
+
+    void printAuthorId(String name);
 }

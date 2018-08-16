@@ -55,9 +55,16 @@ public class LibraryCommands {
         libraryService.count();
     }
 
-    @ShellMethod("Удалить книгу по номеру ID: dell id_number")
+    @ShellMethod("Удалить книгу по номеру ID: del id_number")
     public void del(
             @ShellOption int id){
         libraryService.delBook(id);
+    }
+
+    @ShellMethod("показать id автора по имени")
+    public void showAuthor(
+            @ShellOption String name
+    ){
+        libraryService.printAuthorId(name);
     }
 }

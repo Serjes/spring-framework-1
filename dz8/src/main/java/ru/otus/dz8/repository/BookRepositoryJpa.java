@@ -28,7 +28,7 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public long count() {
-        return (long)entityManager.createQuery("select count(b.id) from Book b").getSingleResult();//.getFirstResult();
+        return (long)entityManager.createQuery("select count(b.id) from Book b").getSingleResult();
     }
 
     @Override
@@ -44,5 +44,10 @@ public class BookRepositoryJpa implements BookRepository {
     @Override
     public Book getByName(String name) {
         return null;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        entityManager.remove(entityManager.find(Book.class, id));
     }
 }
