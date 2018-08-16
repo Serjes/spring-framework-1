@@ -4,28 +4,20 @@ package ru.otus.dz8.shell;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import ru.otus.dz8.service.CommentService;
 import ru.otus.dz8.service.LibraryService;
 
 @ShellComponent
 public class LibraryCommands {
     private final LibraryService libraryService;
+    private final CommentService commentService;
 
-    public LibraryCommands(LibraryService libraryService) {
+    public LibraryCommands(LibraryService libraryService, CommentService commentService) {
         this.libraryService = libraryService;
+        this.commentService = commentService;
     }
 
-//    @ShellMethod("Запустить консоль H2DB")
-////    @ShellMethod("Running of the DB-console")
-//    public void runConsole(){
-//        try {
-//            Console.main("-browser");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     @ShellMethod("Добавить книгу в библиотеку: add book_name --author author_name --genre genre_name")
-//    @ShellMethod("Adding a book to the Library: add book_name --author author_name --genre genre_name")
     public void add(
             @ShellOption String bookName,
             @ShellOption String author,
@@ -37,20 +29,28 @@ public class LibraryCommands {
 
     @ShellMethod("Добавить шаблонную книгу")
 //    @ShellMethod("Add one template book")
-    public void addt() {
+    public void addtemp() {
         libraryService.addTemplateBook();
         System.out.println("Добавляем книгу: \"Азазель\", Б.Акунин, детектив");
         return;
     }
 
+    @ShellMethod("Добавить комментарий для книги по номеру ID: addc id_book --content text")
+    public void addc(
+            @ShellOption int id,
+            @ShellOption String content
+    ){
+        System.out.println("Добавляем комментарий: \"" + content + "\"" );
+//        libraryService.addBook(bookName, author, genre);
+        commentService.add(content, id);
+    }
+
     @ShellMethod("Показать все книги в библиотеке")
-//    @ShellMethod("View all books")
-    public void viewAll(){
-        libraryService.view();
+    public void list(){
+        libraryService.listBooks();
     }
 
     @ShellMethod("Вывести количество книг в библитеке")
-//    @ShellMethod("Count books")
     public void count(){
         libraryService.count();
     }
@@ -61,10 +61,23 @@ public class LibraryCommands {
         libraryService.delBook(id);
     }
 
-    @ShellMethod("показать id автора по имени")
-    public void showAuthor(
+    @ShellMethod("Показать всех авторов книг в библиотеке")
+    public void lista(){
+        libraryService.listAuthors();
+    }
+
+    @ShellMethod("Показать ID автора по имени: showaid author_name")
+    public void showaid(
             @ShellOption String name
     ){
         libraryService.printAuthorId(name);
+    }
+
+    @ShellMethod("Показать все комментарии по ID книги: listc id_book")
+    public void listc(
+            @ShellOption int id
+    ){
+//        libraryService.printAuthorId(name);
+        commentService.listByBook(id);
     }
 }

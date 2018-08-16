@@ -10,6 +10,7 @@ import ru.otus.dz8.domain.Book;
 import ru.otus.dz8.domain.Genre;
 import ru.otus.dz8.repository.AuthorRepositoryJpa;
 import ru.otus.dz8.repository.BookRepositoryJpa;
+import ru.otus.dz8.repository.GenreRepositoryJpa;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Autowired
     private BookRepositoryJpa bookRepositoryJpa;
+
+    @Autowired
+    private GenreRepositoryJpa genreRepositoryJpa;
 
     @Autowired
     private AuthorRepositoryJpa authorRepositoryJpa;
@@ -33,19 +37,20 @@ public class LibraryServiceImpl implements LibraryService {
         Author author = authorRepositoryJpa.getByName(authorName);
         if (author == null) {
             author = new Author(authorName);
-//            authorRepositoryJpa.insert(author);
+            authorRepositoryJpa.insert(author);
         }
-
-//        Author author = new Author(authorName);
-        Genre genre = new Genre(genreName);
+        Genre genre = genreRepositoryJpa.getByName(genreName);
+        if (genre == null) {
+            genre = new Genre(genreName);
+            genreRepositoryJpa.insert(genre);
+        }
+//        Genre genre = new Genre(genreName);
         Book book = new Book(name, author, genre);
-
-
         bookRepositoryJpa.insert(book);
     }
 
     @Override
-    public void view() {
+    public void listBooks() {
         List<Book> books = bookRepositoryJpa.getAll();
         for (Book book : books) {
             System.out.println("ID:" + book.getId() + " название: \"" + book.getName() + "\", автор: "
@@ -66,6 +71,14 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public void printAuthorId(String name) {
         System.out.println("id: " + authorRepositoryJpa.getByName(name).getId());
+    }
+
+    @Override
+    public void listAuthors() {
+        List<Author> authors = authorRepositoryJpa.getAll();
+        for (Author author : authors) {
+            System.out.println("ID:" + author.getId() + " автор: " + author.getName());
+        }
     }
 
 //    private final BookDao bookDao;
@@ -90,7 +103,7 @@ public class LibraryServiceImpl implements LibraryService {
 //            System.out.println("Возникли проблемы с базой при добавлении новой книги");
 //            return;
 //        }
-//        bookDao.insert(new Book(1, name, authorId, genreId));
+//        bookDao.add(new Book(1, name, authorId, genreId));
 //    }
 //
 //    @Override
@@ -99,7 +112,7 @@ public class LibraryServiceImpl implements LibraryService {
 //    }
 //
 //    @Override
-//    public void view() {
+//    public void listBooks() {
 //        List<Book> allBooks = bookDao.getAll();
 //        for (Book book : allBooks) {
 //            System.out.println("ID:" + book.getId() + " название: \"" + book.getName() + "\", автор: " + book.getAuthorName() + ", жанр: " + book.getGenreName());

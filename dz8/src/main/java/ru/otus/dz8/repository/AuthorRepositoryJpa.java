@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -27,12 +28,18 @@ public class AuthorRepositoryJpa implements AuthorRepository {
         } catch (NoResultException e) {
             return null;
         }
-//        return query.getSingleResult();
-//        return null;
     }
 
     @Override
     public void insert(Author author) {
         entityManager.persist(author);
+    }
+
+    @Override
+    public List<Author> getAll() {
+        TypedQuery<Author> query = entityManager.createQuery(
+                "select a from Author a",
+                Author.class);
+        return query.getResultList();
     }
 }

@@ -48,7 +48,7 @@ public class LibraryServiceImplTest {
 //        List<Book> books = new ArrayList<>();
 //        books.add(new Book(1,"Азазель", "Б.Акунин", "детектив"));
 //        Mockito.when(this.bookDao.getAll()).thenReturn(books);
-//        booksService.view();
+//        booksService.listBooks();
 //        assertEquals("ID:1 название: \"Азазель\", автор: Б.Акунин, жанр: детектив\r\n", outContent.toString());
     }
 }

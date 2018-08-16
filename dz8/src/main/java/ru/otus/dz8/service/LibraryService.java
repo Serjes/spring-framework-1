@@ -4,13 +4,15 @@ public interface LibraryService {
 
     void addTemplateBook();
 
-    void addBook(String name, String genre, String author);
+    void addBook(String name, String author, String genre);
 
-    void view();
+    void listBooks();
 
     void count();
 
     void delBook(int id);
 
     void printAuthorId(String name);
+
+    void listAuthors();
 }

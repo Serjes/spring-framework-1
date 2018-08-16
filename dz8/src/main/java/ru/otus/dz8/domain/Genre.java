@@ -9,22 +9,12 @@ import java.util.Set;
 public class Genre {
 
     @Id
-//    @GeneratedValue
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
     @OneToMany(mappedBy="genre", fetch=FetchType.LAZY, orphanRemoval = true)
-    private Set<Book> books = new HashSet<>();
-
-//    @OneToOne(orphanRemoval = true)
-//    private Book book;
-
-//    public Genre(int id, String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
-
+    private Set<Book> books;// = new HashSet<>();
 
     public Genre() {
     }

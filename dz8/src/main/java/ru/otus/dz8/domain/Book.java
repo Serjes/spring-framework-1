@@ -1,6 +1,7 @@
 package ru.otus.dz8.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -11,16 +12,22 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-//    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+//    @ManyToOne(cascade = CascadeType.MERGE)
+//    @ManyToOne(cascade = CascadeType.PERSIST)
     @ManyToOne
-//    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "author_id", nullable = false)
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "genre_id", nullable = false)
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+//    @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Comment> comments;
 
     public Book() {
     }
