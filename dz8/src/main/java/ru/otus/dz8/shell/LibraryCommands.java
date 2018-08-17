@@ -41,7 +41,6 @@ public class LibraryCommands {
             @ShellOption String content
     ){
         System.out.println("Добавляем комментарий: \"" + content + "\"" );
-//        libraryService.addBook(bookName, author, genre);
         commentService.add(content, id);
     }
 
@@ -77,7 +76,6 @@ public class LibraryCommands {
     public void listc(
             @ShellOption int id
     ){
-//        libraryService.printAuthorId(name);
         commentService.listByBook(id);
     }
 }

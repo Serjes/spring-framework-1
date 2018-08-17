@@ -8,22 +8,15 @@ import java.util.List;
 public class Book {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-//    @ManyToOne(cascade = CascadeType.MERGE)
-//    @ManyToOne(cascade = CascadeType.PERSIST)
     @ManyToOne
-//    @JoinColumn(name = "author_id", nullable = false)
     @JoinColumn(name = "author_id")
     private Author author;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @ManyToOne(cascade = CascadeType.PERSIST)
     @ManyToOne
     @JoinColumn(name = "genre_id")
-//    @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, orphanRemoval = true)

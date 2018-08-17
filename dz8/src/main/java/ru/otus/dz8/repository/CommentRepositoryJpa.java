@@ -29,7 +29,6 @@ public class CommentRepositoryJpa implements CommentRepository{
         TypedQuery<Comment> query = entityManager.createQuery(
                 "select c from Comment c where c.book.id = :id", Comment.class);
         query.setParameter("id", book.getId());
-//        return query.getResultList();
         try {
             List<Comment> comments = query.getResultList();
             return comments;

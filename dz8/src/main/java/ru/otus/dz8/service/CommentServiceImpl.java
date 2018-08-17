@@ -39,6 +39,5 @@ public class CommentServiceImpl implements CommentService {
             System.out.println(i + ") " + comment.getContent());
             i++;
         }
-//        return;
     }
 }

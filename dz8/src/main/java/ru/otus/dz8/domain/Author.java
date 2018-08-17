@@ -16,7 +16,7 @@ public class Author {
     private String name;
 
     @OneToMany(mappedBy="author", fetch=FetchType.LAZY, orphanRemoval = true)
-    private Set<Book> books;// = new HashSet<>();
+    private Set<Book> books;
 
     public Author() {
     }
